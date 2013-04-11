@@ -1,3 +1,6 @@
+# Populates a trie from the Mac word list
+# Can use the trie to determine all the possible words that begin with a substring
+# Can also use the trie to determine possible words based on numbers on a phone, similar to T9 predictive text
 class TextPredictor
   def initialize(words)
     @character_map = {
