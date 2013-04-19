@@ -16,11 +16,11 @@ class LRUCache
 
   def bound(bound)
     bound = bound.to_i
-    # If bound changes such that new bound is smaller, remove the last n nodes, where n is the difference between the old size bound and the new bound
-    if @bound && bound < @bound
-      @queue[bound..@queue.length - 1].each do |node|
-         @hash.delete(node.key)
-         @queue.delete(node)
+    # If bound changes such that new bound is smaller, remove the last n nodes, where n is the difference between the size of the queue and the new bound
+    if @bound && bound < @queue.size
+      @queue[0...@queue.size - bound].each do |node|
+        @hash.delete(node.key)
+        @queue.delete(node)
       end
     end    
     @bound = bound
@@ -70,9 +70,11 @@ class LRUCache
   end
 
   def read_input
+    # commands = File.open('lru_input.txt').read.split(/\n/)
     commands = ARGF.read.split(/\n/)
     num_commands = commands.shift.to_i
-    commands.each do |command|
+    commands.each_with_index do |command, i|
+      break if i + 1 > num_commands
       split_command = command.split(' ')
       method = split_command.shift.downcase
       self.send(method, *split_command)
