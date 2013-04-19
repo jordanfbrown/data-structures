@@ -31,16 +31,38 @@ def reverse_words(string)
 end
 
 def str_to_int(string)
-	total = 0
-	negative = string[0] == '-'
-	length = negative ? string.length - 1 : string.length
-	string[1..string.length-1].split('').each_with_index do |char|
-		total *= 10
-		total += char  
-	end
-	total
+  total = 0
+  len = string.length
+  string.each_char.with_index { |ch, i| total += 10 ** (len - i - 1) * (ch.ord - 48) }
+  total
 end
 
-puts str_to_int("-305")
+# "1" -> "11" this can be thought of as there is one one.
+# "11" -> "21" there are two ones
+# "21" -> "1211" there is one two and one one
+# "1211" -> "111221" ect. there is one one, one two and two ones
+def string_to_oral(string)
+  current_count = 1
+  last_char = string[0]
+  string[1..string.length - 1].each_char.with_index do |ch, i|
+    if ch == last_char
+      current_count += 1
+    else
+      print current_count.to_s + last_char
+      current_count = 1
+      last_char = ch
+    end
+
+    if string.length == i + 2
+      print current_count.to_s + ch + "\n"
+    end
+  end
+end
+
+def num_inputs(string)
+
+end
 
 
+
+string_to_oral("144144144")

@@ -10,7 +10,7 @@ $graph = {
 }
 
 def connected?(start_node, end_node)
-	explored = {}
+	explored = {}                                  ow
 	unexplored = [start_node]
 
 	while unexplored.length > 0
