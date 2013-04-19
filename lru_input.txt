@@ -1,0 +1,11 @@
+8
+BOUND 5
+SET a 2
+SET b 4
+DUMP
+GET b
+PEEK a
+BOUND 2
+SET c 5
+GET a
+DUMP
