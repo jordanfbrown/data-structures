@@ -17,7 +17,7 @@ class LRUCache
   def bound(bound)
     bound = bound.to_i
     # If bound changes such that new bound is smaller, remove the last n nodes, where n is the difference between the size of the queue and the new bound
-    if @bound && bound < @queue.size
+    if bound < @queue.size
       @queue[0...@queue.size - bound].each do |node|
         @hash.delete(node.key)
         @queue.delete(node)
